@@ -33,10 +33,8 @@
                 }
 
                 //Store data in array
-//                echo "<pre>";
-//                $data["results"] = array("addr : $pdv->adresse, price = $price ");
-                $data =  array();
-                $data["result"] = array(
+                echo "<pre>";
+                $data = array(
                     'adress'=>$pdv->adresse,
                     'cp'=>$pdv->attributes()->cp,
 //                    'ville'=>$pdv->ville,

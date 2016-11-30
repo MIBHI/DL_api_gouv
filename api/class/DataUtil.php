@@ -21,7 +21,7 @@ class DataUtil {
                 }
             }
 
-            //Clod dir
+            //Close dir
             closedir($handle);
         }
 

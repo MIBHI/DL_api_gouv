@@ -1,9 +1,15 @@
 <?php
 
-if (file_exists('data/PrixCarburants_quotidien_20161123.xml')) {
+require_once 'class/DataUtil.php';
+
+//Method update daily data
+DataUtil::dailyUpdate();
+
+
+if (file_exists('data/'.DataUtil::getFileName())) {
 
     //Store into var array of object
-    $xml = simplexml_load_file('data/PrixCarburants_quotidien_20161123.xml');
+    $xml = simplexml_load_file('data/'.DataUtil::getFileName());
 
     //While pdv
     foreach( $xml as $pdv){
@@ -14,21 +20,13 @@ if (file_exists('data/PrixCarburants_quotidien_20161123.xml')) {
             //init. price
             $price = 0;
 
-            //foreach all price
-            foreach($pdv->prix as $value){
-                //Get value filter url get
-                if($value['nom'] == $_GET['type']){
-                    $price = $value['valeur']/1000;
-                }
-            }
-
-
-            //if <prix> existe into xml file
             if($pdv->prix){
-                //Get price match $type
-                if(0==strcasecmp($pdv->prix->attributes()->nom ,$_GET['type'])){
-                    //Store value into $price
-                    $price =  floatval($pdv->prix->attributes()->valeur/1000);
+                //foreach all price
+                foreach($pdv->prix as $value){
+                    //Get value filter url get
+                    if($value['nom'] == $_GET['type']){
+                        $price = $value['valeur']/1000;
+                    }
                 }
             }
 

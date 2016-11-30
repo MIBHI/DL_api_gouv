@@ -1,19 +1,48 @@
 <?php
 
-$cp = 83300;
-
 if (file_exists('data/PrixCarburants_quotidien_20161123.xml')) {
 
+    //Store into var array of object
     $xml = simplexml_load_file('data/PrixCarburants_quotidien_20161123.xml');
-    echo '<pre>';
-    //print_r($xml);
-    echo '</pre>';
 
-
+    //While pdv
     foreach( $xml as $pdv){
-        if($pdv->attributes()->cp == $cp){
-            echo $pdv->adresse . '<br>';
-            echo $pdv->attributes()->cp . ' ' . $pdv->ville ."<br>";
+
+        //Get data match $cp
+        if($pdv->attributes()->cp == $_GET['cp']){
+
+            //init. price
+            $price = 0;
+
+            //foreach all price
+            foreach($pdv->prix as $value){
+                //Get value filter url get
+                if($value['nom'] == $_GET['type']){
+                    $price = $value['valeur']/1000;
+                }
+            }
+
+
+            //if <prix> existe into xml file
+            if($pdv->prix){
+                //Get price match $type
+                if(0==strcasecmp($pdv->prix->attributes()->nom ,$_GET['type'])){
+                    //Store value into $price
+                    $price =  floatval($pdv->prix->attributes()->valeur/1000);
+                }
+            }
+
+            //Store data in array
+            $data = array(
+                'adress'=>$pdv->adresse,
+                'cb'=>$pdv->attributes()->cp,
+                'ville'=>$pdv->ville,
+                'ouverture'=>$pdv->ouverture->attributes()->debut,
+                'fermeture'=>$pdv->ouverture->attributes()->fin,
+                'prix'=>$price
+            );
+
+            echo json_encode($data);
         }
     }
 

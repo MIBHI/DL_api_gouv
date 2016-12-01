@@ -8,7 +8,8 @@
  */
 class DataUtil {
 
-    static function getFileName(){
+    static function getFileName() {
+        $fileName = NULL;
         //Open dir
         if ($handle = opendir('data/')) {
 
@@ -16,7 +17,7 @@ class DataUtil {
             while (false !== ($entry = readdir($handle))) {
 
                 //if file is xml
-                if(pathinfo($entry)['extension'] == 'xml'){
+                if(pathinfo($entry)['extension'] == 'xml') {
                     $fileName = $entry;
                 }
             }
@@ -36,7 +37,7 @@ class DataUtil {
             while (false !== ($entry = readdir($handle))) {
 
                 //if file is xml
-                if(pathinfo($entry)['extension'] == 'xml'){
+                if(pathinfo($entry)['extension'] == 'xml') {
                     //Delete file
                     unlink('data/'.$entry);
                 }
@@ -49,7 +50,7 @@ class DataUtil {
         return true;
     }
 
-    static function dailyUpdate(){
+    static function dailyUpdate() {
 
         //Clean dir before update
         static::cleanData();
@@ -65,9 +66,11 @@ class DataUtil {
         if ($zip->open('data/temp.zip') === TRUE) {
             $zip->extractTo('data/');
             $zip->close();
-            echo 'ok';
+            //echo 'ok';
+
         } else {
-            echo 'échec';
+
+            echo 'failure';
         }
         //Delete temp file
         unlink('data/temp.zip');

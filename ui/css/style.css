@@ -1,8 +1,11 @@
 /*début de notre style*/
- 
+
 body {
     font: 16px/1.4em 'PT Sans', sans-serif;;
     color: #1c1c1c;
+    background-image: url("../img/bg.jpeg");
+    background-size: cover;
+    margin-bottom: 100px;
 }
  
 p,
@@ -32,6 +35,11 @@ h2 {
 }
  
 /*layout*/
+
+#loader,
+#dataDisplay{
+    display: none;
+}
  
 .wrapper {
     width: 100%;
@@ -40,6 +48,25 @@ h2 {
 
 .core{
     margin: 30px;
+}
+
+.form-app{
+    background: rgba(0, 0, 0, 0.33);
+    padding: 15px;
+}
+
+.input-app{
+    background-color: rgba(255, 255, 255, 0.74);
+    height: 50px;
+    border: solid 1px rgba(255, 255, 255, 0.15);
+}
+
+#dataDisplay{
+    background: rgba(0, 0, 0, 0.33);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    color: #fff;
 }
  
 article {
@@ -173,7 +200,7 @@ footer {
     text-align: center;
     font-size: 14px;
     background-color: #333;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }

@@ -108,7 +108,7 @@
 
                 for (var i = 0; i <= response.classList.length-1; i++) {
 
-                    if (menu.classList[i]=="active"){
+                    if (response.classList[i]=="active"){
 
                         found=true;
                         break;
@@ -116,10 +116,9 @@
                 }
 
                 if (found) {
-
                     response.classList.remove("active");
                 } else {
-
+                    response.innerHTML = "Chargement...";
                     response.classList.add("active");
                 }
             }

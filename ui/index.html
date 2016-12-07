@@ -6,13 +6,13 @@
         <meta name="description" content="CSS only mobile first navigation">
 
         <!-- Toutes les icônes -->
-        <link rel="apple-touch-icon" href="img/custom_icon.png">
+        <link rel="apple-touch-icon" href="img/fuel.png">
         <link rel="apple-touch-icon" href="img/touch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-ipad-retina.png">
-        <link rel="apple-touch-startup-image" href="img/startup.png">
-     
+        <link rel="apple-touch-icon" sizes="76x76" href="img/fuel.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/fuel.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/fuel.png">
+        <link rel="apple-touch-startup-image" href="img/fuel.png">
+
         <!-- Le meta magique pour les appareils mobiles -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -76,7 +76,7 @@
             </div>
      
             <footer>     
-                <p>Copyright © 2016 Mouy Manuel</p>     
+                <p>Copyright © 2016 Mouy M - Austoni M</p>
             </footer>
      
         </div><!--end wrapper-->
@@ -86,7 +86,7 @@
 
             function toggleMenu() {
                 var found = false;
-                var menu = document.getElementById("primary_nav");
+                var menu = document.getElementById("sendRequest");
 
                 for (var i = 0; i <= menu.classList.length-1; i++) {
 
@@ -95,7 +95,7 @@
                         found=true;
                         break;
                     } 
-                }  
+                }
 
                 if (found) {
 
@@ -106,6 +106,26 @@
                 }
             }
 
+            function toggleResponse() {
+                var found = false;
+                var response = document.getElementById("reponse");
+
+                for (var i = 0; i <= response.classList.length-1; i++) {
+
+                    if (response.classList[i]=="active"){
+
+                        found=true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    response.classList.remove("active");
+                } else {
+                    response.innerHTML = "Chargement...";
+                    response.classList.add("active");
+                }
+            }
 
             function getUrl(){
                 return 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
@@ -168,7 +188,7 @@
                 };
 
                 xhr.onerror = function() {
-                    alert('Woops, there was an error making the request.');
+                    document.getElementById('reponse').innerHTML = "Attention ! Vous n'etes plus connecté à internet, Veuillez reactualiser la page pour acceder aux données" ;
                 };
 
                 xhr.send();

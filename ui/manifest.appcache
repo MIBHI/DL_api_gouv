@@ -1,0 +1,25 @@
+CACHE MANIFEST
+
+# v0.1
+
+CACHE:
+css/normalize.css
+css/bootstrap.min.css
+css/style.css
+img/fuel.png
+img/loader.gif
+img/favicon.ico
+img/bg.jpeg
+index.html
+offline.html
+fonts/glyphicons-halflings-regular.woff
+fonts/glyphicons-halflings-regular.eot
+fonts/glyphicons-halflings-regular.svg
+fonts/glyphicons-halflings-regular.woff2
+fonts/glyphicons-halflings-regular.ttf
+
+FALLBACK:
+/ offline.html
+
+NETWORK:
+*

@@ -1,5 +1,10 @@
 /*début de notre style*/
 
+html,
+body{
+    min-height: 100%;
+}
+
 body {
     font: 16px/1.4em 'PT Sans', sans-serif;;
     color: #1c1c1c;

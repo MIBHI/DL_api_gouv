@@ -6,13 +6,13 @@
         <meta name="description" content="CSS only mobile first navigation">
 
         <!-- Toutes les icônes -->
-        <link rel="apple-touch-icon" href="img/custom_icon.png">
+        <link rel="apple-touch-icon" href="img/fuel.png">
         <link rel="apple-touch-icon" href="img/touch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon-ipad.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon-iphone-retina.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-ipad-retina.png">
-        <link rel="apple-touch-startup-image" href="img/startup.png">
-     
+        <link rel="apple-touch-icon" sizes="76x76" href="img/fuel.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/fuel.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/fuel.png">
+        <link rel="apple-touch-startup-image" href="img/fuel.png">
+
         <!-- Le meta magique pour les appareils mobiles -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -70,7 +70,7 @@
             </div>
      
             <footer>     
-                <p>Copyright © 2016 Mouy Manuel</p>     
+                <p>Copyright © 2016 Mouy M - Austoni M</p>
             </footer>
      
         </div><!--end wrapper-->
@@ -101,7 +101,7 @@
             }
 
             function getUrl(){
-                return 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
+                return 'http://192.168.1.127:8080/api/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
             }
 
             // Create the XHR object.
@@ -157,7 +157,7 @@
                 };
 
                 xhr.onerror = function() {
-                    alert('Woops, there was an error making the request.');
+                    document.getElementById('reponse').innerHTML = "Attention ! Vous n'etes plus connecté à internet, Veuillez reactualiser la page pour acceder aux données" ;
                 };
 
                 xhr.send();

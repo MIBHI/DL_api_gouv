@@ -48,25 +48,23 @@
                 </ul>             
             </nav><!--end primary_nav-->
      
-            <div style="margin: 50px 0">
-                <div class="label">
-                    <label for="cp">Code Postal</label>
-                    <input type="text" id="cp" value="83300">
-                </div>
+            <div style="margin: 100px 0">
 
-                <div class="label">
-                    <label for="type">Type</label>
-                    <select name="type" id="type">
-                        <!--<option></option>-->
-                        <option value="gazole">Gazole</option>
-                        <option value="e10">E10</option>
-                        <option value="e85">E85</option>
-                        <option value="sp95">SP95</option>
-                        <option value="sp98">SP98</option>
-                        <option value="gpl">GPL</option>
-                    </select>
-                </div>
-                <button id="sendRequest" onclick="makeCorsRequest(); toggleResponse()">Envoyer</button>
+                <label for="cp">Code Postal</label>
+                <input type="text" id="cp" value="83300">
+
+                <label for="type">Type</label>
+                <select name="type" id="type">
+                    <!--<option></option>-->
+                    <option value="gazole">Gazole</option>
+                    <option value="e10">E10</option>
+                    <option value="e85">E85</option>
+                    <option value="sp95">SP95</option>
+                    <option value="sp98">SP98</option>
+                    <option value="gpl">GPL</option>
+                </select>
+
+                <button id="sendRequest" onclick="makeCorsRequest()">Envoyer</button>
 
                 <div id="reponse"></div>
             </div>
@@ -125,7 +123,7 @@
             }
 
             function getUrl(){
-                return 'http://192.168.1.127:8080/api/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
+                return 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
             }
 
             // Create the XHR object.

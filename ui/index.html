@@ -6,13 +6,13 @@
         <meta name="description" content="CSS only mobile first navigation">
 
         <!-- Toutes les icônes -->
-        <link rel="apple-touch-icon" href="img/fuel.png">
+        <link rel="apple-touch-icon" href="img/custom_icon.png">
         <link rel="apple-touch-icon" href="img/touch-icon-iphone.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="img/fuel.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="img/fuel.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="img/fuel.png">
-        <link rel="apple-touch-startup-image" href="img/fuel.png">
-
+        <link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-startup-image" href="img/startup.png">
+     
         <!-- Le meta magique pour les appareils mobiles -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,6 +20,7 @@
      
         <!--css-->
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
 
         <!--[if lt IE 9]>
@@ -49,28 +50,33 @@
             </nav><!--end primary_nav-->
      
             <div style="margin: 100px 0">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="cp" placeholder="Code postale" onkeyup="makeCorsRequest()">
+                        </div>
+                        <div class="input-group">
+                            <select name="type" id="type" class="form-control" onchange="makeCorsRequest()">
+                                <option>Type</option>
+                                <option value="gazole">Gazole</option>
+                                <option value="e10">E10</option>
+                                <option value="e85">E85</option>
+                                <option value="sp95">SP95</option>
+                                <option value="sp98">SP98</option>
+                                <option value="gpl">GPL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
-                <label for="cp">Code Postal</label>
-                <input type="text" id="cp" value="83300">
-
-                <label for="type">Type</label>
-                <select name="type" id="type">
-                    <!--<option></option>-->
-                    <option value="gazole">Gazole</option>
-                    <option value="e10">E10</option>
-                    <option value="e85">E85</option>
-                    <option value="sp95">SP95</option>
-                    <option value="sp98">SP98</option>
-                    <option value="gpl">GPL</option>
-                </select>
-
-                <button id="sendRequest" onclick="makeCorsRequest()">Envoyer</button>
-
-                <div id="reponse"></div>
+                <div id="reponse">
+                    <img id="loader" src="img/loader.gif" alt="" style="display: none">
+                    <div id="dataDisplay"></div>
+                </div>
             </div>
      
             <footer>     
-                <p>Copyright © 2016 Mouy M - Austoni M</p>
+                <p>Copyright © 2016 Mouy Manuel</p>     
             </footer>
      
         </div><!--end wrapper-->
@@ -80,7 +86,7 @@
 
             function toggleMenu() {
                 var found = false;
-                var menu = document.getElementById("sendRequest");
+                var menu = document.getElementById("primary_nav");
 
                 for (var i = 0; i <= menu.classList.length-1; i++) {
 
@@ -89,7 +95,7 @@
                         found=true;
                         break;
                     } 
-                }
+                }  
 
                 if (found) {
 
@@ -100,27 +106,6 @@
                 }
             }
 
-            function toggleResponse() {
-                var found = false;
-                var response = document.getElementById("reponse");
-
-                for (var i = 0; i <= response.classList.length-1; i++) {
-
-                    if (menu.classList[i]=="active"){
-
-                        found=true;
-                        break;
-                    }
-                }
-
-                if (found) {
-
-                    response.classList.remove("active");
-                } else {
-
-                    response.classList.add("active");
-                }
-            }
 
             function getUrl(){
                 return 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
@@ -143,16 +128,10 @@
                 return xhr;
             }
 
-            // Helper method to parse the title tag from the response.
-            function getTitle(text) {
-                return text.match('<title>(.*)?</title>')[1];
-            }
-
             // Make the actual CORS request.
             function makeCorsRequest() {
                 // This is a sample server that supports CORS.
-                var url = getUrl();
-                var xhr = createCORSRequest('GET', url);
+                var xhr = createCORSRequest('GET', getUrl());
 
                 if (!xhr) {
                     alert('CORS not supported');
@@ -161,25 +140,35 @@
 
                 // Response handlers.
                 xhr.onload = function() {
-                    var text = xhr.responseText;
-                    //var title = getTitle(text);
+
+                    //Clean data
+                    document.getElementById('dataDisplay').innerHTML = '';
+
+                    //Display loader and hide data
+                    document.getElementById('dataDisplay').style.display = "none";
+                    document.getElementById('loader').style.display = "block";
 
                     //Array objet of data
-                    var data = JSON.parse(text);
+                    var data = JSON.parse(xhr.responseText);
 
-                    document.getElementById('reponse').innerHTML = data.status+'<br>';
-
-                    for (var i = 0; i < data.results.length; i++) {
-                        document.getElementById('reponse').innerHTML += 'Adresse : '+data.results[i].addr+'<br>';
-                        document.getElementById('reponse').innerHTML += 'Prix : '+data.results[i].price+'<br>';
+                    //Display data if status if ok
+                    if (data.status === 'ok'){
+                        for (var i = 0; i < data.results.length; i++) {
+                            document.getElementById('dataDisplay').innerHTML += 'Adresse : '+data.results[i].addr+'<br>';
+                            document.getElementById('dataDisplay').innerHTML += 'Prix : '+data.results[i].price+'<br>';
+                        }
+                    }else{
+                        //TODO ERRO MESSAGE
                     }
 
-
+                    //Hide loader and display data
+                    document.getElementById('loader').style.display = "none";
+                    document.getElementById('dataDisplay').style.display = "block";
 
                 };
 
                 xhr.onerror = function() {
-                    document.getElementById('reponse').innerHTML = "Attention ! Vous n'etes plus connecté à internet, Veuillez reactualiser la page pour acceder aux données" ;
+                    alert('Woops, there was an error making the request.');
                 };
 
                 xhr.send();

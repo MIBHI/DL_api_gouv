@@ -50,9 +50,12 @@
      
             <div style="margin: 100px 0">
 
-                <label for="cp">Code Postale</label>
+                <label for="cp">Code Postal</label>
                 <input type="text" id="cp">
+
+                <label for="type">Type</label>
                 <select name="type" id="type">
+                    <option></option>
                     <option value="gazole">Gazole</option>
                     <option value="e10">E10</option>
                     <option value="e85">E85</option>
@@ -60,7 +63,10 @@
                     <option value="sp98">SP98</option>
                     <option value="gpl">GPL</option>
                 </select>
-                <button id="sendRequest" onclick="getUrl()">Envoyer</button>
+
+                <button id="sendRequest" onclick="makeCorsRequest()">Envoyer</button>
+
+                <div id="reponse"></div>
             </div>
      
             <footer>     
@@ -71,6 +77,7 @@
      
 
         <script>
+
             function toggleMenu() {
                 var found = false;
                 var menu = document.getElementById("primary_nav");
@@ -94,6 +101,10 @@
             }
 
 
+            function getUrl(){
+                var url = 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
+                return url;
+            }
 
             // Create the XHR object.
             function createCORSRequest(method, url) {
@@ -120,9 +131,9 @@
             // Make the actual CORS request.
             function makeCorsRequest() {
                 // This is a sample server that supports CORS.
-                var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
-
+                var url = getUrl();
                 var xhr = createCORSRequest('GET', url);
+
                 if (!xhr) {
                     alert('CORS not supported');
                     return;
@@ -131,8 +142,13 @@
                 // Response handlers.
                 xhr.onload = function() {
                     var text = xhr.responseText;
-                    var title = getTitle(text);
-                    alert('Response from CORS request to ' + url + ': ' + title);
+                    //var title = getTitle(text);
+
+                    var data = JSON.parse(text);
+
+                    document.getElementById('reponse').innerHTML = data.status;
+
+
                 };
 
                 xhr.onerror = function() {

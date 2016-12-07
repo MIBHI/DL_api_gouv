@@ -41,7 +41,16 @@ h2 {
  
 /*layout*/
 
-#loader,
+.loader:before{
+    content: '';
+    background-image: url(../img/loader.gif);
+    height: 70px;
+    width: 70px;
+    display: block;
+    margin: 0 auto;
+    background-size: contain;
+}
+
 #dataDisplay{
     display: none;
 }

@@ -49,25 +49,23 @@
                 </ul>             
             </nav><!--end primary_nav-->
      
-            <div style="margin: 100px 0">
-                <div class="form-inline">
+            <div class="core">
+                <form>
                     <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" type="text" id="cp" placeholder="Code postale" onkeyup="makeCorsRequest()">
-                        </div>
-                        <div class="input-group">
-                            <select name="type" id="type" class="form-control" onchange="makeCorsRequest()">
-                                <option>Type</option>
-                                <option value="gazole">Gazole</option>
-                                <option value="e10">E10</option>
-                                <option value="e85">E85</option>
-                                <option value="sp95">SP95</option>
-                                <option value="sp98">SP98</option>
-                                <option value="gpl">GPL</option>
-                            </select>
-                        </div>
+                        <input class="form-control" type="text" id="cp" placeholder="Code postale" onkeyup="makeCorsRequest()">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <select name="type" id="type" class="form-control" onchange="makeCorsRequest()">
+                            <option>Type</option>
+                            <option value="gazole">Gazole</option>
+                            <option value="e10">E10</option>
+                            <option value="e85">E85</option>
+                            <option value="sp95">SP95</option>
+                            <option value="sp98">SP98</option>
+                            <option value="gpl">GPL</option>
+                        </select>
+                    </div>
+                </form>
 
                 <div id="reponse">
                     <img id="loader" src="img/loader.gif" alt="" style="display: none">
@@ -174,8 +172,8 @@
                     //Display data if status if ok
                     if (data.status === 'ok'){
                         for (var i = 0; i < data.results.length; i++) {
-                            document.getElementById('dataDisplay').innerHTML += 'Adresse : '+data.results[i].addr+'<br>';
-                            document.getElementById('dataDisplay').innerHTML += 'Prix : '+data.results[i].price+'<br>';
+                            document.getElementById('dataDisplay').innerHTML += '<strong>Adresse :</strong> '+data.results[i].addr+'<br>';
+                            document.getElementById('dataDisplay').innerHTML += '<strong>Prix : </strong>'+data.results[i].price+'<br><br>';
                         }
                     }else{
                         //TODO ERRO MESSAGE

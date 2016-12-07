@@ -68,7 +68,6 @@
                 </form>
 
                 <div id="reponse">
-                    <img id="loader" src="img/loader.gif" alt="">
                     <div id="dataDisplay"></div>
                 </div>
             </div>
@@ -149,10 +148,16 @@
             // Make the actual CORS request.
             function makeCorsRequest() {
 
-                //alert(document.getElementById("type").value.length);
-
                 //If input length is > 5 & select is not empty
                 if ( document.getElementById('cp').value.length == 5 && document.getElementById("type").value.length != 0 && document.getElementById("type").value != 'Type'){
+
+                    //Clean data
+                    document.getElementById('dataDisplay').innerHTML = '';
+
+                    //Display loader and hide data
+                    document.getElementById('dataDisplay').style.display = "block";
+                    document.getElementById('dataDisplay').setAttribute("class", "loader");
+
                     // This is a sample server that supports CORS.
                     var xhr = createCORSRequest('GET', getUrl());
 
@@ -164,27 +169,21 @@
                     // Response handlers.
                     xhr.onload = function() {
 
-                        //Clean data
-                        document.getElementById('dataDisplay').innerHTML = '';
-
-                        //Display loader and hide data
-                        document.getElementById('loader').style.display = "block";
-
                         //Array objet of data
                         var data = JSON.parse(xhr.responseText);
 
                         //Display data if status if ok
                         if (data.status === 'ok'){
                             for (var i = 0; i < data.results.length; i++) {
-                                document.getElementById('dataDisplay').innerHTML += '<strong><span style="color: #ec971f" class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Adresse :</strong> '+data.results[i].addr+'<br>';
-                                document.getElementById('dataDisplay').innerHTML += '<strong><span style="color: greenyellow" class="glyphicon glyphicon-usd" aria-hidden="true"></span> Prix : </strong>'+data.results[i].price+'<br><br>';
+                                document.getElementById('dataDisplay').innerHTML += '<strong><span style="color: #ec971f" class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> </strong> '+data.results[i].addr+'<br>';
+                                document.getElementById('dataDisplay').innerHTML += '<strong><span style="color: greenyellow" class="glyphicon glyphicon-usd" aria-hidden="true"></span> </strong>'+data.results[i].price+'<br><br>';
                             }
                         }else{
                             //TODO ERRO MESSAGE
                         }
 
                         //Hide loader and display data
-                        document.getElementById('loader').style.display = "none";
+                        document.getElementById('dataDisplay').setAttribute("class", "");
                         document.getElementById('dataDisplay').style.display = "block";
 
                     };

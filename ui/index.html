@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>Application Api</title>
@@ -48,8 +48,19 @@
                 </ul>             
             </nav><!--end primary_nav-->
      
-            <div>
-                <h3>Application</h3>
+            <div style="margin: 100px 0">
+
+                <label for="cp">Code Postale</label>
+                <input type="text" id="cp">
+                <select name="type" id="type">
+                    <option value="gazole">Gazole</option>
+                    <option value="e10">E10</option>
+                    <option value="e85">E85</option>
+                    <option value="sp95">SP95</option>
+                    <option value="sp98">SP98</option>
+                    <option value="gpl">GPL</option>
+                </select>
+                <button id="sendRequest" onclick="getUrl()">Envoyer</button>
             </div>
      
             <footer>     
@@ -82,9 +93,55 @@
                 }
             }
 
-            function getApi() {
 
+
+            // Create the XHR object.
+            function createCORSRequest(method, url) {
+                var xhr = new XMLHttpRequest();
+                if ("withCredentials" in xhr) {
+                    // XHR for Chrome/Firefox/Opera/Safari.
+                    xhr.open(method, url, true);
+                } else if (typeof XDomainRequest != "undefined") {
+                    // XDomainRequest for IE.
+                    xhr = new XDomainRequest();
+                    xhr.open(method, url);
+                } else {
+                    // CORS not supported.
+                    xhr = null;
+                }
+                return xhr;
             }
+
+            // Helper method to parse the title tag from the response.
+            function getTitle(text) {
+                return text.match('<title>(.*)?</title>')[1];
+            }
+
+            // Make the actual CORS request.
+            function makeCorsRequest() {
+                // This is a sample server that supports CORS.
+                var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
+
+                var xhr = createCORSRequest('GET', url);
+                if (!xhr) {
+                    alert('CORS not supported');
+                    return;
+                }
+
+                // Response handlers.
+                xhr.onload = function() {
+                    var text = xhr.responseText;
+                    var title = getTitle(text);
+                    alert('Response from CORS request to ' + url + ': ' + title);
+                };
+
+                xhr.onerror = function() {
+                    alert('Woops, there was an error making the request.');
+                };
+
+                xhr.send();
+            }
+
         </script>
 
     </body>

@@ -3,7 +3,7 @@
 body {
     font: 16px/1.4em 'PT Sans', sans-serif;;
     color: #1c1c1c;
-}#A80000
+}
  
 p,
 ul {
@@ -49,6 +49,19 @@ article {
 header {
     background: #333;
     padding: 15px 20px !important;
+}
+
+#reponse.active {
+    margin: 20px 0;
+    border: 1px solid #000000;
+    box-shadow: 0px 0px 3px #000;
+    background-color: #af0000;
+    padding: 5px 10px;
+    color: #fff;
+}
+
+.label {
+    margin: 20px 0;
 }
  
 /*shorter clearfix http://nicolasgallagher.com/micro-clearfix-hack/*/

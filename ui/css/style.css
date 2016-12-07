@@ -1,0 +1,207 @@
+/*début de notre style*/
+ 
+body {
+    font: 16px/1.4em 'PT Sans', sans-serif;;
+    color: #1c1c1c;
+}#A80000
+ 
+p,
+ul {
+    margin: 0 0 1.5em;
+}
+ 
+ul {
+    list-style: disc;
+    padding: 0 0 0 20px;
+}
+ 
+a {
+    color: #af0000;
+}
+ 
+h1 {
+    font-size: 0em;
+}
+ 
+h2 {
+    font-family: 'PT Serif', serif;
+    font-size: 32px;
+    line-height: 1.4em;
+    margin: 0 0 .4em;
+    font-weight: bold;
+}
+ 
+/*layout*/
+ 
+.wrapper {
+    width: 300px;
+    margin: 0 auto;
+}
+ 
+article {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 20px 0 20px;
+    margin: 10px 0;
+}
+ 
+/*header*/
+ 
+header {
+    background: #333;
+    padding: 15px 20px !important;
+}
+ 
+/*shorter clearfix http://nicolasgallagher.com/micro-clearfix-hack/*/
+header:before,
+header:after {
+    content:"";
+    display:table;
+}
+
+header:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+header {
+    zoom:1;
+}
+ 
+h1.logo a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+    line-height: 22px;
+    float: left;
+    letter-spacing: 0.2em;
+}
+ 
+a.to_nav {
+    float: right;
+    color: #fff;
+    background: #4e4e4e;
+    text-decoration: none;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 22px;
+    height: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+ 
+a.to_nav:hover,
+a.to_nav:focus {
+    color: #1c1c1c;
+    background: #ccc;
+}
+
+/*menu*/
+
+#primary_nav {
+    display: block;
+    overflow: hidden;
+    height: 0;
+    transition: all 0.5s;
+}
+
+#primary_nav.active {
+    display: block;
+    overflow: hidden;
+    height: 200px;
+}
+ 
+#primary_nav ul {
+    list-style: none;
+    background: #333;
+    padding: 5px 0;
+}
+ 
+#primary_nav li a {
+    display: block;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    letter-spacing: 0.1em;
+    line-height: 2em;
+    height: 2em;
+    border-bottom: 1px solid #383838;
+}
+ 
+#primary_nav li:last-child a {
+    border-bottom: none;
+}
+ 
+#primary_nav li a:hover,
+#primary_nav li a:focus {
+    background-color: #af0000;;
+    background-image: linear-gradient( #737373, rgba(255,255,255,0));
+    /*transition: background-color 0s;*/
+}
+ 
+/*pied de page*/
+ 
+footer {
+    padding: 5px 10px;
+    font-family: 'PT Serif', serif;
+    font-style: italic;
+    text-align: center;
+    font-size: 14px;
+    background-color: #333;
+}
+
+footer p {
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 768px) {
+ 
+    a.to_nav {
+        display: none;
+    }
+ 
+    .wrapper {
+        position: relative;
+        width: 1300px;
+        margin: auto;
+    }
+ 
+    #primary_nav {
+        display: block;
+        overflow: visible;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: none;
+    }
+ 
+    #primary_nav li {
+        display: inline;
+    }
+ 
+    #primary_nav li a {
+        float: left;
+        border: none;
+        padding: 0 10px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+
+
+    #primary_nav li.top {
+        display: none;
+    }
+ 
+}

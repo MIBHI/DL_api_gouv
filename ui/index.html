@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Application Api</title>
+        <meta name="description" content="CSS only mobile first navigation">
+
+        <!-- Toutes les icônes -->
+        <link rel="apple-touch-icon" href="img/custom_icon.png">
+        <link rel="apple-touch-icon" href="img/touch-icon-iphone.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="img/touch-icon-ipad.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="img/touch-icon-iphone-retina.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="img/touch-icon-ipad-retina.png">
+        <link rel="apple-touch-startup-image" href="img/startup.png">
+     
+        <!-- Le meta magique pour les appareils mobiles -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+     
+        <!--css-->
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->    
+
+        <!-- Favicons-->
+        <link rel="shortcut icon" href="favicon.ico">     
+    </head>
+
+    <body id="home"> 
+        <div class="wrapper">     
+            <header> 
+                <h1 class="logo"><a href="">Nav</a></h1>             
+                <a class="to_nav" href="#primary_nav" onclick="toggleMenu()" >Menu</a>             
+            </header>
+
+            <nav id="primary_nav"> 
+                <ul>             
+                    <li><a href="">Portfolio</a></li>             
+                    <li><a href="">About Me</a></li>             
+                    <li><a href="">Nonsense</a></li>             
+                    <li><a href="#" onclick="getApi();return false;">Services</a></li>             
+                    <li><a href="">Contact</a></li>             
+                    <li class="top"><a href="#home">Top</a></li>             
+                </ul>             
+            </nav><!--end primary_nav-->
+     
+            <div>
+                <h3>Application</h3>
+            </div>
+     
+            <footer>     
+                <p>Copyright © 2016 Mouy Manuel</p>     
+            </footer>
+     
+        </div><!--end wrapper-->
+     
+
+        <script>
+            function toggleMenu() {
+                var found = false;
+                var menu = document.getElementById("primary_nav");
+
+                for (var i = 0; i <= menu.classList.length-1; i++) {
+
+                    if (menu.classList[i]=="active"){
+                        
+                        found=true;
+                        break;
+                    } 
+                }  
+
+                if (found) {
+
+                    menu.classList.remove("active");
+                } else {
+
+                    menu.classList.add("active");
+                }
+            }
+
+            function getApi() {
+
+            }
+        </script>
+
+    </body>
+</html>

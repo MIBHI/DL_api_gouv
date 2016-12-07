@@ -51,11 +51,11 @@
             <div style="margin: 100px 0">
 
                 <label for="cp">Code Postal</label>
-                <input type="text" id="cp">
+                <input type="text" id="cp" value="83300">
 
                 <label for="type">Type</label>
                 <select name="type" id="type">
-                    <option></option>
+                    <!--<option></option>-->
                     <option value="gazole">Gazole</option>
                     <option value="e10">E10</option>
                     <option value="e85">E85</option>
@@ -101,8 +101,7 @@
             }
 
             function getUrl(){
-                var url = 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
-                return url;
+                return 'http://localhost/DL_api_gouv/api/?cp='+document.getElementById("cp").value+'&type='+document.getElementById("type").value;
             }
 
             // Create the XHR object.
@@ -143,9 +142,16 @@
                     var text = xhr.responseText;
                     //var title = getTitle(text);
 
+                    //Array objet of data
                     var data = JSON.parse(text);
 
-                    document.getElementById('reponse').innerHTML = data.status;
+                    document.getElementById('reponse').innerHTML = data.status+'<br>';
+
+                    for (var i = 0; i < data.results.length; i++) {
+                        document.getElementById('reponse').innerHTML += 'Adresse : '+data.results[i].addr+'<br>';
+                        document.getElementById('reponse').innerHTML += 'Prix : '+data.results[i].price+'<br>';
+                    }
+
 
 
                 };
